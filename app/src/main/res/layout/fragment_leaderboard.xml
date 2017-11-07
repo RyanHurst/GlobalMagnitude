@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -11,11 +12,9 @@
     </data>
 
     <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="ryanhurst.globalmagnitude.MainActivityFragment"
+        tools:context="ryanhurst.globalmagnitude.LeaderboardFragment"
         tools:showIn="@layout/activity_main">
 
         <android.support.v7.widget.RecyclerView

@@ -14,18 +14,20 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import ryanhurst.globalmagnitude.databinding.FragmentMainBinding;
+import ryanhurst.globalmagnitude.databinding.FragmentLeaderboardBinding;
 import ryanhurst.globalmagnitude.databinding.RowLeaderboardBinding;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment implements Observer<ArrayList<Score>> {
+public class LeaderboardFragment extends Fragment implements Observer<ArrayList<Score>> {
+
+    public static final String TAG = "LeaderboardFragment";
 
     private LeaderboardViewModel leaderboardViewModel;
-    private FragmentMainBinding binding;
+    private FragmentLeaderboardBinding binding;
 
-    public MainActivityFragment() {
+    public LeaderboardFragment() {
     }
 
     @Override
@@ -38,7 +40,7 @@ public class MainActivityFragment extends Fragment implements Observer<ArrayList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_leaderboard, container, false);
         binding.setVm(leaderboardViewModel);
 
         return binding.getRoot();

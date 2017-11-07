@@ -15,6 +15,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(savedInstanceState == null) {
+            LeaderboardFragment leaderboardFragment = new LeaderboardFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, leaderboardFragment, LeaderboardFragment.TAG)
+                    .commit();
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
