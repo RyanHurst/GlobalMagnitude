@@ -6,10 +6,12 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
+ * AsyncTask to get the leaderboard
+ *
  * Created by Ryan on 11/6/2017.
  */
 
-public class GetLeaderboardAsyncTask extends AsyncTask<Void, ArrayList<Leaderboard>, ArrayList<Leaderboard>> {
+public class GetLeaderboardAsyncTask extends AsyncTask<Void, ArrayList<Score>, ArrayList<Score>> {
 
     private WeakReference<LeaderboardViewModel> leaderboardViewModelWeakReference;
 
@@ -18,19 +20,19 @@ public class GetLeaderboardAsyncTask extends AsyncTask<Void, ArrayList<Leaderboa
     }
 
     @Override
-    protected ArrayList<Leaderboard> doInBackground(Void... voids) {
-        ArrayList<Leaderboard> leaderboard = GmRestHelper.getLeaderboard();
+    protected ArrayList<Score> doInBackground(Void... voids) {
+        ArrayList<Score> leaderboard = GmRestHelper.getLeaderboard();
         return leaderboard;
     }
 
     @Override
-    protected void onPostExecute(ArrayList<Leaderboard> leaderboards) {
-        super.onPostExecute(leaderboards);
+    protected void onPostExecute(ArrayList<Score> leaderboard) {
+        super.onPostExecute(leaderboard);
 
         LeaderboardViewModel leaderboardViewModel = leaderboardViewModelWeakReference.get();
 
         if(leaderboardViewModel != null) {
-            leaderboardViewModel.setLeaderboard(leaderboards);
+            leaderboardViewModel.setLeaderboard(leaderboard);
         }
     }
 }

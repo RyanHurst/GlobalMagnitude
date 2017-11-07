@@ -3,21 +3,21 @@ package ryanhurst.globalmagnitude;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Leaderboard object
+ * Score model
  *
  * Created by Ryan on 11/6/2017.
  */
 
-public class Leaderboard {
+public class Score {
     @SerializedName("userid")
     public String userId;
 
     @SerializedName("score")
-    public String score;
+    public int score;
 
     @SerializedName("mtime")
-    public String matchTime;
+    public double matchTime;
 
     @SerializedName("qtime")
-    public String averageQuestionTime;
+    public double averageQuestionTime;
 }

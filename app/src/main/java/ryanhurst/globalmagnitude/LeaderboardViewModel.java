@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 
 /**
+ * ViewModel for leaderboard
+ *
  * Created by Ryan on 11/6/2017.
  */
 
@@ -19,13 +21,13 @@ public class LeaderboardViewModel extends BaseObservableViewModel {
     @Bindable
     public boolean loading;
 
-    private MutableLiveData<ArrayList<Leaderboard>> leaderboardLiveData;
+    private MutableLiveData<ArrayList<Score>> leaderboardLiveData;
 
     public LeaderboardViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public LiveData<ArrayList<Leaderboard>> getLeaderboards() {
+    public LiveData<ArrayList<Score>> getLeaderboard() {
         if(leaderboardLiveData == null && getLeaderboardAsynctask == null) {
             loading = true;
             notifyPropertyChanged(BR.loading);
@@ -46,7 +48,9 @@ public class LeaderboardViewModel extends BaseObservableViewModel {
         getLeaderboardAsynctask = null;
     }
 
-    void setLeaderboard(ArrayList<Leaderboard> leaderboard) {
+    void setLeaderboard(ArrayList<Score> leaderboard) {
+        loading = false;
+        notifyPropertyChanged(BR.loading);
         leaderboardLiveData.setValue(leaderboard);
     }
 

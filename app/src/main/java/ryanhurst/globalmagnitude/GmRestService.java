@@ -16,9 +16,9 @@ import retrofit2.http.POST;
 public interface GmRestService {
 
     @GET("leaderboard")
-    Call<ArrayList<Leaderboard>> getLeaderboard();
+    Call<ArrayList<Score>> getLeaderboard();
 
-    @POST("leaderboard")
-    Call<Leaderboard> submitResults(@Body Leaderboard leaderboard);
+    @POST("score")
+    Call<Score> submitScore(@Body Score score);
 
 }

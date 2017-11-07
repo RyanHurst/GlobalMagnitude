@@ -29,8 +29,8 @@ public class GmRestHelper {
     }
 
 
-    static ArrayList<Leaderboard> getLeaderboard() {
-        Call<ArrayList<Leaderboard>> call = getService().getLeaderboard();
+    static ArrayList<Score> getLeaderboard() {
+        Call<ArrayList<Score>> call = getService().getLeaderboard();
         try {
             return call.execute().body();
         } catch(IOException e) {
