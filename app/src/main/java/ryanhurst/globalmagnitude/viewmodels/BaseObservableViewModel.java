@@ -1,4 +1,4 @@
-package ryanhurst.globalmagnitude;
+package ryanhurst.globalmagnitude.viewmodels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -13,7 +13,7 @@ import android.support.annotation.NonNull;
  * Created by Ryan on 11/6/2017.
  */
 
-public class BaseObservableViewModel extends AndroidViewModel implements Observable {
+public abstract class BaseObservableViewModel extends AndroidViewModel implements Observable {
     private transient PropertyChangeRegistry mCallbacks;
 
     public BaseObservableViewModel(@NonNull Application application) {

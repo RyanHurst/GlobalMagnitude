@@ -16,9 +16,12 @@ import java.util.ArrayList;
 
 import ryanhurst.globalmagnitude.databinding.FragmentLeaderboardBinding;
 import ryanhurst.globalmagnitude.databinding.RowLeaderboardBinding;
+import ryanhurst.globalmagnitude.models.Score;
+import ryanhurst.globalmagnitude.viewmodels.LeaderboardViewModel;
+import ryanhurst.globalmagnitude.viewmodels.ScoreViewModel;
 
 /**
- * A placeholder fragment containing a simple view.
+ * Leaderboard Fragment
  */
 public class LeaderboardFragment extends Fragment implements Observer<ArrayList<Score>> {
 

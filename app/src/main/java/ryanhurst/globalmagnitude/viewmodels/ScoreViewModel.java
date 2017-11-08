@@ -1,7 +1,9 @@
-package ryanhurst.globalmagnitude;
+package ryanhurst.globalmagnitude.viewmodels;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+
+import ryanhurst.globalmagnitude.models.Score;
 
 /**
  * Score ViewModel

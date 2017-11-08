@@ -8,14 +8,13 @@
 
         <variable
             name="vm"
-            type="ryanhurst.globalmagnitude.LeaderboardViewModel"/>
+            type="ryanhurst.globalmagnitude.viewmodels.LeaderboardViewModel"/>
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="ryanhurst.globalmagnitude.LeaderboardFragment"
-        tools:showIn="@layout/activity_main">
+        tools:context="ryanhurst.globalmagnitude.LeaderboardFragment">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/leaderboard_recycler_view"

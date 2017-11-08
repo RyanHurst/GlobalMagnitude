@@ -1,4 +1,4 @@
-package ryanhurst.globalmagnitude;
+package ryanhurst.globalmagnitude.models;
 
 import com.google.gson.annotations.SerializedName;
 

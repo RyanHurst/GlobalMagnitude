@@ -5,6 +5,9 @@ import android.os.AsyncTask;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
+import ryanhurst.globalmagnitude.models.Score;
+import ryanhurst.globalmagnitude.viewmodels.LeaderboardViewModel;
+
 /**
  * AsyncTask to get the leaderboard
  *
@@ -15,7 +18,7 @@ public class GetLeaderboardAsyncTask extends AsyncTask<Void, ArrayList<Score>, A
 
     private WeakReference<LeaderboardViewModel> leaderboardViewModelWeakReference;
 
-    GetLeaderboardAsyncTask(LeaderboardViewModel leaderboardViewModel) {
+    public GetLeaderboardAsyncTask(LeaderboardViewModel leaderboardViewModel) {
         this.leaderboardViewModelWeakReference = new WeakReference<LeaderboardViewModel>(leaderboardViewModel);
     }
 

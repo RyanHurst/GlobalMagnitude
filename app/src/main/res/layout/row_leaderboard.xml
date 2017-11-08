@@ -5,7 +5,7 @@
     <data>
         <variable
             name="vm"
-            type="ryanhurst.globalmagnitude.ScoreViewModel"/>
+            type="ryanhurst.globalmagnitude.viewmodels.ScoreViewModel"/>
     </data>
 
     <LinearLayout

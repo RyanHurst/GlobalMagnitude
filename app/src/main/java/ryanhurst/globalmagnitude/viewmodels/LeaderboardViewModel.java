@@ -1,4 +1,4 @@
-package ryanhurst.globalmagnitude;
+package ryanhurst.globalmagnitude.viewmodels;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
@@ -7,6 +7,10 @@ import android.databinding.Bindable;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
+
+import ryanhurst.globalmagnitude.BR;
+import ryanhurst.globalmagnitude.GetLeaderboardAsyncTask;
+import ryanhurst.globalmagnitude.models.Score;
 
 /**
  * ViewModel for leaderboard
@@ -48,7 +52,7 @@ public class LeaderboardViewModel extends BaseObservableViewModel {
         getLeaderboardAsynctask = null;
     }
 
-    void setLeaderboard(ArrayList<Score> leaderboard) {
+    public void setLeaderboard(ArrayList<Score> leaderboard) {
         loading = false;
         notifyPropertyChanged(BR.loading);
         leaderboardLiveData.setValue(leaderboard);
