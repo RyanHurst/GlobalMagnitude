@@ -13,9 +13,9 @@ public class GmHelper {
         long leftOverMillis = elapsedTimeMillis % (1000 * 60);
         long elapsedSeconds = leftOverMillis / 1000;
         leftOverMillis = leftOverMillis % 1000;
-        long elapsedHundredths = leftOverMillis / 10;
+        long elapsedTenths = leftOverMillis / 100;
 
-        return String.format(Locale.US, "%02d:%02d.%02d", elapsedMinutes, elapsedSeconds, elapsedHundredths);
+        return String.format(Locale.US, "%02d:%02d.%01d", elapsedMinutes, elapsedSeconds, elapsedTenths);
     }
 
     public static String getElapsedSeconds(long elapsedTimeMillis) {

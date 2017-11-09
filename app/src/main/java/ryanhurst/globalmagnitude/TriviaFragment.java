@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -30,6 +31,16 @@ public class TriviaFragment extends Fragment implements Observer<ArrayList<Integ
     private FragmentTriviaBinding binding;
     private TriviaViewModel triviaViewModel;
 
+    private Handler handler;
+
+    private Runnable updateTimer = new Runnable() {
+        @Override
+        public void run() {
+            triviaViewModel.notifyPropertyChanged(BR.time);
+            handler.postDelayed(updateTimer, 100);
+        }
+    };
+
     public TriviaFragment() {
         // Required empty public constructor
     }
@@ -41,6 +52,19 @@ public class TriviaFragment extends Fragment implements Observer<ArrayList<Integ
         super.onCreate(savedInstanceState);
         triviaViewModel = ViewModelProviders.of(getActivity()).get(TriviaViewModel.class);
         triviaViewModel.getAnswers().observe(this, this);
+        handler = new Handler();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        updateTimer.run();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        handler.removeCallbacks(updateTimer);
     }
 
     @Override
