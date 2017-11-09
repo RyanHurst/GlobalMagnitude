@@ -30,15 +30,16 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginBottom="50dp"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/TriviaNumber"
+                        style="@style/GmText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{vm.factor1}"
+                        android:textSize="48sp"
                         tools:text="24"/>
 
                     <ImageView
@@ -49,10 +50,11 @@
                         android:tint="@color/colorAccent"/>
 
                     <TextView
-                        style="@style/TriviaNumber"
+                        style="@style/GmText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{vm.factor2}"
+                        android:textSize="48sp"
                         tools:text="48"/>
 
                 </LinearLayout>
@@ -74,18 +76,21 @@
             android:padding="16dp">
 
             <TextView
+                style="@style/GmText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{vm.currentRoundIndex}"
                 tools:text="1"/>
 
             <TextView
+                style="@style/GmText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="2dp"
                 android:text="@string/of"/>
 
             <TextView
+                style="@style/GmText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{vm.numberOfRounds}"
@@ -94,12 +99,13 @@
         </LinearLayout>
 
         <TextView
+            style="@style/GmText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{vm.time}"
-            tools:text="00:00.0"
             android:layout_alignParentEnd="true"
             android:padding="16dp"
+            android:text="@{vm.time}"
+            tools:text="00:00.0"
             />
 
     </RelativeLayout>

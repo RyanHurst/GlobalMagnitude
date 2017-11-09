@@ -1,4 +1,5 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -10,33 +11,50 @@
             type="ryanhurst.globalmagnitude.viewmodels.TriviaViewModel"/>
     </data>
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
         tools:context="ryanhurst.globalmagnitude.SubmitScoreFragment">
 
+        <TextView
+            android:id="@+id/submit_button"
+            style="@style/GmButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="@{!vm.loading}"
+            android:text="@string/submit"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            />
+
         <ScrollView
+            android:layout_above="@id/submit_button"
+            android:layout_alignParentTop="true"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/username_edit_text"
+                    style="@style/GmText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="@{!vm.loading}"
+                    android:gravity="center"
                     android:hint="@string/username_hint"
-                    android:textColor="@color/colorPrimary"
                     android:maxLength="30"
-                    android:text="@={vm.username}"/>
+                    android:text="@={vm.username}"
+                    android:textColor="@color/colorAccent"/>
 
                 <TextView
+                    style="@style/GmText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
@@ -51,12 +69,14 @@
                     android:layout_marginBottom="10dp">
 
                     <TextView
+                        style="@style/GmText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/score"/>
 
                     <TextView
+                        style="@style/GmText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -72,12 +92,14 @@
                     android:layout_marginBottom="10dp">
 
                     <TextView
+                        style="@style/GmText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/match_time"/>
 
                     <TextView
+                        style="@style/GmText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -93,12 +115,14 @@
                     android:layout_marginBottom="40dp">
 
                     <TextView
+                        style="@style/GmText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/average_question_time"/>
 
                     <TextView
+                        style="@style/GmText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -108,25 +132,16 @@
 
                 </LinearLayout>
 
-
-                <Button
-                    android:id="@+id/submit_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:enabled="@{!vm.loading}"
-                    android:text="@string/submit"
-                    />
-
             </LinearLayout>
         </ScrollView>
 
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_centerInParent="true"
             android:visibility="@{vm.loading ? View.VISIBLE : View.GONE}"/>
 
-    </FrameLayout>
+    </RelativeLayout>
 
 
 </layout>
