@@ -45,8 +45,6 @@ public class TriviaFragment extends Fragment implements Observer<ArrayList<Integ
         // Required empty public constructor
     }
 
-    // TODO: 11/8/2017 update timer ever so often
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
