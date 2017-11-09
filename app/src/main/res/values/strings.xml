@@ -1,17 +1,19 @@
 <resources>
     <string name="app_name">Global Magnitude</string>
 
-    <string name="username_hint">Username…</string>
+    <string name="username_hint">USERNAME…</string>
     <string name="submit">SUBMIT SCORE!</string>
 
-    <string name="score">Score</string>
-    <string name="match_time">Match time</string>
-    <string name="average_question_time">Average question time</string>
+    <string name="username">USERNAME</string>
+    <string name="score">SCORE</string>
+    <string name="match_time">MATCH TIME</string>
+    <string name="time">TIME</string>
+    <string name="average_question_time">AVERAGE QUESTION TIME</string>
     <string name="username_is_required">Username is required</string>
     <string name="score_submitted">Score submitted!</string>
 
     <string name="error">error</string>
     <string name="play">PLAY</string>
-    <string name="of">of</string>
+    <string name="of">OF</string>
 
 </resources>

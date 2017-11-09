@@ -10,9 +10,56 @@
             type="ryanhurst.globalmagnitude.viewmodels.TriviaViewModel"/>
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/top_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/GmText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{vm.currentRoundIndex}"
+                    tools:text="1"/>
+
+                <TextView
+                    style="@style/GmText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:text="@string/of"/>
+
+                <TextView
+                    style="@style/GmText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{vm.numberOfRounds}"
+                    tools:text="20"/>
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/GmText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="@{vm.time}"
+                tools:text="00:00.0"
+                />
+
+        </RelativeLayout>
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -22,7 +69,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_margin="16dp"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -68,46 +114,6 @@
 
         </android.support.v4.widget.NestedScrollView>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="16dp">
-
-            <TextView
-                style="@style/GmText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{vm.currentRoundIndex}"
-                tools:text="1"/>
-
-            <TextView
-                style="@style/GmText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="2dp"
-                android:text="@string/of"/>
-
-            <TextView
-                style="@style/GmText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{vm.numberOfRounds}"
-                tools:text="20"/>
-
-        </LinearLayout>
-
-        <TextView
-            style="@style/GmText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:padding="16dp"
-            android:text="@{vm.time}"
-            tools:text="00:00.0"
-            />
-
-    </RelativeLayout>
+    </LinearLayout>
 
 </layout>

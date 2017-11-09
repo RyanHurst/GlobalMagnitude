@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -46,6 +47,8 @@ public class LeaderboardFragment extends Fragment {
             @Override
             public void onChanged(@Nullable ArrayList<Score> leaderboard) {
                 if(leaderboard != null) {
+                    ViewCompat.setNestedScrollingEnabled(binding.leaderboardRecyclerView, false);
+
                     RecyclerView.Adapter adapter = binding.leaderboardRecyclerView.getAdapter();
                     if(adapter == null) {
                         binding.leaderboardRecyclerView.setHasFixedSize(true);

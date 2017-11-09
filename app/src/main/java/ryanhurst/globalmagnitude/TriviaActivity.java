@@ -11,11 +11,11 @@ public class TriviaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trivia);
+        setContentView(R.layout.activity_main);
 
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.trivia_container, new TriviaFragment(), TriviaFragment.TAG)
+                    .add(R.id.fragment_container, new TriviaFragment(), TriviaFragment.TAG)
                     .commit();
         }
     }

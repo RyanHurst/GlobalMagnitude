@@ -146,7 +146,7 @@ public class TriviaFragment extends Fragment implements Observer<ArrayList<Integ
                     triviaViewModel.answerQuestion(position);
                     if(triviaViewModel.gameOver()) {
                         getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.trivia_container, new SubmitScoreFragment(), SubmitScoreFragment.TAG)
+                                .replace(R.id.fragment_container, new SubmitScoreFragment(), SubmitScoreFragment.TAG)
                                 .commit();
                     }
                 }
