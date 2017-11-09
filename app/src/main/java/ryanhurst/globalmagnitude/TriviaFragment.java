@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +33,8 @@ public class TriviaFragment extends Fragment implements Observer<ArrayList<Integ
     public TriviaFragment() {
         // Required empty public constructor
     }
+
+    // TODO: 11/8/2017 update timer ever so often
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -118,6 +119,11 @@ public class TriviaFragment extends Fragment implements Observer<ArrayList<Integ
                 @Override
                 public void onClick(View view) {
                     triviaViewModel.answerQuestion(position);
+                    if(triviaViewModel.gameOver()) {
+                        getActivity().getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.trivia_container, new SubmitScoreFragment(), SubmitScoreFragment.TAG)
+                                .commit();
+                    }
                 }
             });
         }

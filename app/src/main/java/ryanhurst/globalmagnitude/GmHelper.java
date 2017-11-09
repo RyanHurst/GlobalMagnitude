@@ -18,5 +18,9 @@ public class GmHelper {
         return String.format(Locale.US, "%02d:%02d.%02d", elapsedMinutes, elapsedSeconds, elapsedHundredths);
     }
 
+    public static String getElapsedSeconds(long elapsedTimeMillis) {
+        double elapsedSeconds = ((double) elapsedTimeMillis) / 1000;
+        return String.format(Locale.US, "%.2f", elapsedSeconds);
+    }
 
 }

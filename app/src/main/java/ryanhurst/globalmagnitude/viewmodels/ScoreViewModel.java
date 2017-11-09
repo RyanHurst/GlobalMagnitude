@@ -31,7 +31,7 @@ public class ScoreViewModel extends BaseObservable {
 
     @Bindable
     public String getMatchTime() {
-        return scoreModel.matchTime + "";
+        return scoreModel.matchTime;
     }
 
     @Bindable

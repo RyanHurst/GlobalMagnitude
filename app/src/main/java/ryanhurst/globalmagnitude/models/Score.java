@@ -13,11 +13,18 @@ public class Score {
     public String userId;
 
     @SerializedName("score")
-    public int score;
+    public String score;
 
     @SerializedName("mtime")
-    public double matchTime;
+    public String matchTime;
 
     @SerializedName("qtime")
-    public double averageQuestionTime;
+    public String averageQuestionTime;
+
+    public Score(String userId, String score, String matchTime, String averageQuestionTime) {
+        this.userId = userId;
+        this.score = score.replace("%", "");
+        this.matchTime = matchTime;
+        this.averageQuestionTime = averageQuestionTime;
+    }
 }

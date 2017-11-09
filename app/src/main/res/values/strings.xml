@@ -2,6 +2,15 @@
     <string name="app_name">Global Magnitude</string>
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="username_hint">Username…</string>
+    <string name="submit">Submit score!</string>
+
+    <string name="score">Score</string>
+    <string name="match_time">Match time</string>
+    <string name="average_question_time">Average question time</string>
+    <string name="username_is_required">Username is required</string>
+    <string name="score_submitted">Score submitted!</string>
+
+    <string name="error">error</string>
+
 </resources>

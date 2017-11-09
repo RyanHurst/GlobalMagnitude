@@ -19,7 +19,7 @@ public interface GmRestService {
     @GET("leaderboard")
     Call<ArrayList<Score>> getLeaderboard();
 
-    @POST("score")
-    Call<Score> submitScore(@Body Score score);
+    @POST("leaderboard")
+    Call<Void> submitScore(@Body Score score);
 
 }

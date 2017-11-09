@@ -1,7 +1,5 @@
 package ryanhurst.globalmagnitude.models;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -19,6 +17,7 @@ public class TriviaGame {
 
     public int currentRoundIndex = 0;
     public long startTime;
+    public long endTime;
 
     public TriviaGame() {
         startTime = System.currentTimeMillis();

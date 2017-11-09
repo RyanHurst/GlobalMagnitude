@@ -32,7 +32,7 @@ public class LeaderboardViewModel extends BaseObservableViewModel {
     }
 
     public LiveData<ArrayList<Score>> getLeaderboard() {
-        if(leaderboardLiveData == null && getLeaderboardAsynctask == null) {
+        if(getLeaderboardAsynctask == null) {
             loading = true;
             notifyPropertyChanged(BR.loading);
 
@@ -56,6 +56,7 @@ public class LeaderboardViewModel extends BaseObservableViewModel {
         loading = false;
         notifyPropertyChanged(BR.loading);
         leaderboardLiveData.setValue(leaderboard);
+        getLeaderboardAsynctask = null;
     }
 
 }
