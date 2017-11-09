@@ -2,6 +2,8 @@ package ryanhurst.globalmagnitude;
 
 import java.util.Locale;
 
+import ryanhurst.globalmagnitude.models.TriviaGame;
+
 /**
  * Created by Ryan on 11/8/2017.
  */
@@ -21,6 +23,19 @@ public class GmHelper {
     public static String getElapsedSeconds(long elapsedTimeMillis) {
         double elapsedSeconds = ((double) elapsedTimeMillis) / 1000;
         return String.format(Locale.US, "%.2f", elapsedSeconds);
+    }
+
+    public static int getNumberCorrect(TriviaGame triviaGame) {
+        int numberCorrect = 0;
+
+        for(TriviaGame.Round r : triviaGame.rounds) {
+            int userAnswer = r.answers.get(r.userAnswerIndex);
+            if(r.factor1 * r.factor2 == userAnswer) {
+                numberCorrect++;
+            }
+        }
+
+        return numberCorrect;
     }
 
 }

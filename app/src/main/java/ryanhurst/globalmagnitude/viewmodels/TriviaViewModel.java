@@ -46,15 +46,15 @@ public class TriviaViewModel extends BaseObservableViewModel {
     }
 
     @Bindable
-    public String getScore() {
-        int numberCorrect = 0;
+    public String getNumberCorrect() {
+        int numberCorrect = GmHelper.getNumberCorrect(triviaGameModel);
 
-        for(TriviaGame.Round r : triviaGameModel.rounds) {
-            int userAnswer = r.answers.get(r.userAnswerIndex);
-            if(r.factor1 * r.factor2 == userAnswer) {
-                numberCorrect++;
-            }
-        }
+        return numberCorrect + "/" + TriviaGame.NUMBER_OF_ROUNDS;
+    }
+
+    @Bindable
+    public String getScore() {
+        int numberCorrect = GmHelper.getNumberCorrect(triviaGameModel);
 
         int percent = (numberCorrect * 100) / TriviaGame.NUMBER_OF_ROUNDS;
         return percent + "%";
