@@ -3,18 +3,16 @@ package ryanhurst.globalmagnitude.viewmodels;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.databinding.Bindable;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
-import ryanhurst.globalmagnitude.BR;
 import ryanhurst.globalmagnitude.GetLeaderboardAsyncTask;
 import ryanhurst.globalmagnitude.models.Score;
 
 /**
  * ViewModel for leaderboard
- *
+ * <p>
  * Created by Ryan on 11/6/2017.
  */
 
@@ -22,29 +20,19 @@ public class LeaderboardViewModel extends BaseObservableViewModel {
 
     private GetLeaderboardAsyncTask getLeaderboardAsynctask;
 
-    @Bindable
-    public boolean loading;
+    public MutableLiveData<Boolean> loading = new MutableLiveData<>();
 
-    private MutableLiveData<ArrayList<Score>> leaderboardLiveData;
+    private MutableLiveData<ArrayList<Score>> leaderboardLiveData = new MutableLiveData<>();
 
     public LeaderboardViewModel(@NonNull Application application) {
         super(application);
     }
 
     public LiveData<ArrayList<Score>> getLeaderboard() {
-        if(getLeaderboardAsynctask == null &&
+        if((loading.getValue() == null || !loading.getValue()) &&
                 (leaderboardLiveData == null || leaderboardLiveData.getValue() == null)) {
-            if(leaderboardLiveData == null) {
-                leaderboardLiveData = new MutableLiveData<>();
-            } else {
-                leaderboardLiveData.setValue(null);
-            }
-
-            loading = true;
-            notifyPropertyChanged(BR.loading);
-
             getLeaderboardAsynctask = new GetLeaderboardAsyncTask(this);
-
+            loading.setValue(true);
             getLeaderboardAsynctask.execute();
         }
 
@@ -60,9 +48,15 @@ public class LeaderboardViewModel extends BaseObservableViewModel {
         }
     }
 
+    public void onSwipeRefresh() {
+        if(loading.getValue() == null || !loading.getValue()) {
+            leaderboardLiveData.setValue(null);
+            getLeaderboard();
+        }
+    }
+
     public void setLeaderboard(ArrayList<Score> leaderboard) {
-        loading = false;
-        notifyPropertyChanged(BR.loading);
+        loading.setValue(false);
         leaderboardLiveData.setValue(leaderboard);
         if(getLeaderboardAsynctask != null) {
             getLeaderboardAsynctask.cancel(true);

@@ -20,25 +20,26 @@
         <Button
             android:id="@+id/play_button"
             android:layout_width="wrap_content"
-            android:text="@string/play"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
+            android:text="@string/play"
             />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/leaderboard_recycler_view"
-            android:paddingBottom="48dp"
-            android:clipToPadding="false"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="@{vm.loading ? View.VISIBLE : View.GONE}"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/leaderboard_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingBottom="48dp"/>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
 
     </RelativeLayout>
 </layout>

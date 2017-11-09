@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,7 +27,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * Leaderboard Fragment
  */
-public class LeaderboardFragment extends Fragment implements Observer<ArrayList<Score>> {
+public class LeaderboardFragment extends Fragment {
 
     public static final String TAG = "LeaderboardFragment";
     private static final int TRIVIA_REQUEST = 101;
@@ -41,7 +42,21 @@ public class LeaderboardFragment extends Fragment implements Observer<ArrayList<
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         leaderboardViewModel = ViewModelProviders.of(getActivity()).get(LeaderboardViewModel.class);
-        leaderboardViewModel.getLeaderboard().observe(this, this);
+        leaderboardViewModel.getLeaderboard().observe(this, new Observer<ArrayList<Score>>() {
+            @Override
+            public void onChanged(@Nullable ArrayList<Score> leaderboard) {
+                if(leaderboard != null) {
+                    RecyclerView.Adapter adapter = binding.leaderboardRecyclerView.getAdapter();
+                    if(adapter == null) {
+                        binding.leaderboardRecyclerView.setHasFixedSize(true);
+                        binding.leaderboardRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        binding.leaderboardRecyclerView.setAdapter(new LeaderboardAdapter(leaderboard));
+                    } else {
+                        ((LeaderboardAdapter) adapter).setLeaderboard(leaderboard);
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -58,19 +73,24 @@ public class LeaderboardFragment extends Fragment implements Observer<ArrayList<
             }
         });
 
-        return binding.getRoot();
-    }
+        leaderboardViewModel.loading.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean loading) {
+                if(loading == null) {
+                    loading = false;
+                }
+                binding.swipeRefresh.setRefreshing(loading);
+            }
+        });
 
-    @Override
-    public void onChanged(@Nullable ArrayList<Score> leaderboard) {
-        RecyclerView.Adapter adapter = binding.leaderboardRecyclerView.getAdapter();
-        if(adapter == null) {
-            binding.leaderboardRecyclerView.setHasFixedSize(true);
-            binding.leaderboardRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            binding.leaderboardRecyclerView.setAdapter(new LeaderboardAdapter(leaderboard));
-        } else {
-            ((LeaderboardAdapter)adapter).setLeaderboard(leaderboard);
-        }
+        binding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                leaderboardViewModel.onSwipeRefresh();
+            }
+        });
+
+        return binding.getRoot();
     }
 
     public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardViewHolder>{
@@ -114,8 +134,7 @@ public class LeaderboardFragment extends Fragment implements Observer<ArrayList<
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == TRIVIA_REQUEST) {
-            leaderboardViewModel.setLeaderboard(null);
-            leaderboardViewModel.getLeaderboard();
+            leaderboardViewModel.onSwipeRefresh();
         }
     }
 
