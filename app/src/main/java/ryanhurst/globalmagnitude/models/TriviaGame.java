@@ -49,9 +49,9 @@ public class TriviaGame {
             HashSet<Integer> answerSet = new HashSet<>();
             answerSet.add(factor1 * factor2);
             for(int i = 1; i < NUMBER_OF_ANSWERS; i++) {
-                int generatedAnswer = generateAnswer();
+                int generatedAnswer = generateAnswer(factor1, factor2);
                 while(answerSet.contains(generatedAnswer)) {
-                    generatedAnswer = generateAnswer();
+                    generatedAnswer = generateAnswer(factor1, factor2);
                 }
                 answerSet.add(generatedAnswer);
             }
@@ -61,10 +61,11 @@ public class TriviaGame {
             Collections.shuffle(answers);
         }
 
-        private int generateAnswer() {
-            return (int) (Math.random() *
-                    (MAX_NUMBER * MAX_NUMBER - MIN_NUMBER * MIN_NUMBER) +
-                    MIN_NUMBER * MIN_NUMBER);
+        private int generateAnswer(int factor1, int factor2) {
+            int low = ((factor1/10) * (factor2/10)) * 100;
+            int high = ((factor1/10 + 1) * (factor2/10 + 1)) * 100;
+
+            return (int) (Math.random() * (high - low) + low);
         }
 
         private int generateFactor() {
