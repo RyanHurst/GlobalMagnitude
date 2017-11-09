@@ -36,6 +36,7 @@ public class GmRestHelper {
         try {
             Response<ArrayList<Score>> response = call.execute();
             if(response.isSuccessful()) {
+                Log.d(TAG, "got leaderboard");
                 return response.body();
             } else {
                 Log.e(TAG, "error getting leaderboard: " + response.message());
@@ -52,6 +53,7 @@ public class GmRestHelper {
         try {
             Response<Void> response = call.execute();
             if(response.isSuccessful()) {
+                Log.d(TAG, "submitted score");
                 return true;
             } else {
                 Log.e(TAG, "error submitting score: " + response.message());

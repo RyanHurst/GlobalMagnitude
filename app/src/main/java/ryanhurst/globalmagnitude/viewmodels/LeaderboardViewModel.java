@@ -32,11 +32,17 @@ public class LeaderboardViewModel extends BaseObservableViewModel {
     }
 
     public LiveData<ArrayList<Score>> getLeaderboard() {
-        if(getLeaderboardAsynctask == null) {
+        if(getLeaderboardAsynctask == null &&
+                (leaderboardLiveData == null || leaderboardLiveData.getValue() == null)) {
+            if(leaderboardLiveData == null) {
+                leaderboardLiveData = new MutableLiveData<>();
+            } else {
+                leaderboardLiveData.setValue(null);
+            }
+
             loading = true;
             notifyPropertyChanged(BR.loading);
 
-            leaderboardLiveData = new MutableLiveData<>();
             getLeaderboardAsynctask = new GetLeaderboardAsyncTask(this);
 
             getLeaderboardAsynctask.execute();
@@ -58,6 +64,9 @@ public class LeaderboardViewModel extends BaseObservableViewModel {
         loading = false;
         notifyPropertyChanged(BR.loading);
         leaderboardLiveData.setValue(leaderboard);
+        if(getLeaderboardAsynctask != null) {
+            getLeaderboardAsynctask.cancel(true);
+        }
         getLeaderboardAsynctask = null;
     }
 
