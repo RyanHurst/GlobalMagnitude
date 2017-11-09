@@ -48,8 +48,10 @@ public class LeaderboardViewModel extends BaseObservableViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        getLeaderboardAsynctask.cancel(true);
-        getLeaderboardAsynctask = null;
+        if(getLeaderboardAsynctask != null) {
+            getLeaderboardAsynctask.cancel(true);
+            getLeaderboardAsynctask = null;
+        }
     }
 
     public void setLeaderboard(ArrayList<Score> leaderboard) {

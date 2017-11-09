@@ -149,7 +149,9 @@ public class TriviaViewModel extends BaseObservableViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        submitScoreAsyncTask.cancel(true);
-        submitScoreAsyncTask = null;
+        if(submitScoreAsyncTask != null) {
+            submitScoreAsyncTask.cancel(true);
+            submitScoreAsyncTask = null;
+        }
     }
 }
