@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -79,6 +80,8 @@ public class TriviaFragment extends Fragment implements Observer<ArrayList<Integ
     public void onChanged(@Nullable ArrayList<Integer> answers) {
         RecyclerView.Adapter adapter = binding.triviaAnswers.getAdapter();
         if(adapter == null) {
+            ViewCompat.setNestedScrollingEnabled(binding.triviaAnswers, false);
+
             binding.triviaAnswers.setHasFixedSize(true);
             binding.triviaAnswers.setLayoutManager(new GridLayoutManager(getActivity(), 2));
             binding.triviaAnswers.setAdapter(new TriviaAdapter(answers));

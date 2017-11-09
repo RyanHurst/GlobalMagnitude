@@ -91,6 +91,16 @@ public class TriviaViewModel extends BaseObservableViewModel {
         return GmHelper.formatElapsedTime(elapsed);
     }
 
+    @Bindable
+    public String getCurrentRoundIndex() {
+        return (triviaGameModel.currentRoundIndex + 1) + "";
+    }
+
+    @Bindable
+    public String getNumberOfRounds() {
+        return TriviaGame.NUMBER_OF_ROUNDS + "";
+    }
+
     public void answerQuestion(int index) {
         triviaGameModel.getCurrentRound().userAnswerIndex = index;
         if(triviaGameModel.currentRoundIndex < TriviaGame.NUMBER_OF_ROUNDS - 1) {

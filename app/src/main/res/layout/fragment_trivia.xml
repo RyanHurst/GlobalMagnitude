@@ -1,5 +1,5 @@
-<layout  xmlns:android="http://schemas.android.com/apk/res/android"
-         xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -10,55 +10,98 @@
             type="ryanhurst.globalmagnitude.viewmodels.TriviaViewModel"/>
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        tools:context="ryanhurst.globalmagnitude.TriviaFragment">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="00:00.00"
-            android:text="@{vm.time}"
-            />
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="ryanhurst.globalmagnitude.TriviaFragment">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginBottom="50dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TriviaNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{vm.factor1}"
+                        tools:text="24"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="3dp"
+                        android:src="@drawable/x"
+                        android:tint="@color/colorAccent"/>
+
+                    <TextView
+                        style="@style/TriviaNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{vm.factor2}"
+                        tools:text="48"/>
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/trivia_answers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="16dp">
 
             <TextView
-                style="@style/TriviaNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="24"
-                android:text="@{vm.factor1}"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/x"
-                android:padding="3dp"
-                android:tint="@color/colorAccent"/>
+                android:text="@{vm.currentRoundIndex}"
+                tools:text="1"/>
 
             <TextView
-                style="@style/TriviaNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="48"
-                android:text="@{vm.factor2}"/>
+                android:padding="2dp"
+                android:text="@string/of"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{vm.numberOfRounds}"
+                tools:text="20"/>
 
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/trivia_answers"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{vm.time}"
+            tools:text="00:00.0"
+            android:layout_alignParentEnd="true"
+            android:padding="16dp"
+            />
 
-    </LinearLayout>
-
+    </RelativeLayout>
 
 </layout>
