@@ -1,3 +1,4 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="refresh_start">150dp</dimen>
+    <dimen name="refresh_distance">50dp</dimen>
 </resources>

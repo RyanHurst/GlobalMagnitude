@@ -86,6 +86,11 @@ public class LeaderboardFragment extends Fragment {
             }
         });
 
+
+        int pixelStart = getResources().getDimensionPixelOffset(R.dimen.refresh_start);
+        int pixelEnd = pixelStart + getResources().getDimensionPixelOffset(R.dimen.refresh_distance);
+
+        binding.swipeRefresh.setProgressViewOffset(false, pixelStart,  pixelEnd);
         binding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
