@@ -48,6 +48,8 @@
                     android:gravity="center"
                     android:hint="@string/username_hint"
                     android:maxLength="15"
+                    android:inputType="text"
+                    android:ellipsize="end"
                     android:maxLines="1"
                     android:text="@={vm.username}"
                     android:textColor="@color/white"/>
