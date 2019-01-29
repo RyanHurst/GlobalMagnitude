@@ -12,9 +12,9 @@ import static org.junit.Assert.*;
 public class TriviaUnitTests {
     @Test
     public void testElapsedTime() throws Exception {
-        assertTrue("00:00.15".equals(GmHelper.formatElapsedTime(151)));
-        assertTrue("00:30.23".equals(GmHelper.formatElapsedTime(30231)));
-        assertTrue("17:10.04".equals(GmHelper.formatElapsedTime(1030041)));
+        assertEquals("00:00.15", GmHelper.formatElapsedTime(151));
+        assertEquals("00:30.23", GmHelper.formatElapsedTime(30231));
+        assertEquals("17:10.04", GmHelper.formatElapsedTime(1030041));
     }
 
     @Test

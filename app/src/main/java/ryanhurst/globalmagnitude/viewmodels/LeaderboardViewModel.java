@@ -1,12 +1,9 @@
 package ryanhurst.globalmagnitude.viewmodels;
 
-import android.app.Application;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.support.annotation.NonNull;
-
 import java.util.ArrayList;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import ryanhurst.globalmagnitude.GetLeaderboardAsyncTask;
 import ryanhurst.globalmagnitude.models.Score;
 
@@ -16,17 +13,13 @@ import ryanhurst.globalmagnitude.models.Score;
  * Created by Ryan on 11/6/2017.
  */
 
-public class LeaderboardViewModel extends BaseObservableViewModel {
+public class LeaderboardViewModel extends ObservableViewModel {
 
     private GetLeaderboardAsyncTask getLeaderboardAsynctask;
 
     public MutableLiveData<Boolean> loading = new MutableLiveData<>();
 
     private MutableLiveData<ArrayList<Score>> leaderboardLiveData = new MutableLiveData<>();
-
-    public LeaderboardViewModel(@NonNull Application application) {
-        super(application);
-    }
 
     public LiveData<ArrayList<Score>> getLeaderboard() {
         if((loading.getValue() == null || !loading.getValue()) &&

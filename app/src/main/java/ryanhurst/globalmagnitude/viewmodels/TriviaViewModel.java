@@ -1,15 +1,11 @@
 package ryanhurst.globalmagnitude.viewmodels;
 
-import android.app.Application;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.content.SharedPreferences;
-import android.databinding.Bindable;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
+import androidx.databinding.Bindable;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import ryanhurst.globalmagnitude.BR;
 import ryanhurst.globalmagnitude.GmHelper;
 import ryanhurst.globalmagnitude.SubmitScoreAsyncTask;
@@ -22,7 +18,7 @@ import ryanhurst.globalmagnitude.models.TriviaGame;
  * Created by Ryan on 11/7/2017.
  */
 
-public class TriviaViewModel extends BaseObservableViewModel {
+public class TriviaViewModel extends ObservableViewModel {
 
     private static final String TAG = "TriviaViewModel";
     private static final String USERNAME_KEY = "username";
@@ -39,10 +35,10 @@ public class TriviaViewModel extends BaseObservableViewModel {
     @Bindable
     public boolean loading;
 
-    public TriviaViewModel(@NonNull Application application) {
-        super(application);
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(application);
-        username = preferences.getString(USERNAME_KEY, "");
+    public TriviaViewModel() {
+//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences();
+//        this.username = preferences.getString(USERNAME_KEY, "");
+        this.username = "ryan";
     }
 
     @Bindable
@@ -131,10 +127,10 @@ public class TriviaViewModel extends BaseObservableViewModel {
     }
 
     public LiveData<Boolean> submitScore(Score score) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this.getApplication());
-        preferences.edit()
-                .putString(USERNAME_KEY, username)
-                .apply();
+//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this.getApplication());
+//        preferences.edit()
+//                .putString(USERNAME_KEY, username)
+//                .apply();
 
         if(submitScoreAsyncTask == null) {
             loading = true;
