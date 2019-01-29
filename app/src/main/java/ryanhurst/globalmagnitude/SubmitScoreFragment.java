@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import ryanhurst.globalmagnitude.databinding.FragmentSubmitScoreBinding;
-import ryanhurst.globalmagnitude.models.Score;
 import ryanhurst.globalmagnitude.viewmodels.TriviaViewModel;
 
 
@@ -35,6 +34,9 @@ public class SubmitScoreFragment extends Fragment implements Observer<Boolean> {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         triviaViewModel = ViewModelProviders.of(getActivity()).get(TriviaViewModel.class);
+        if (savedInstanceState == null) {
+            triviaViewModel.username = GmHelper.getUsername(getActivity());
+        }
         ViewModelProviders.of(this).get(TriviaViewModel.class);
     }
 
@@ -49,9 +51,7 @@ public class SubmitScoreFragment extends Fragment implements Observer<Boolean> {
             @Override
             public void onClick(View view) {
                 if(triviaViewModel.usernameValid()) {
-                    Score score = new Score(triviaViewModel.username, triviaViewModel.getScore(),
-                            triviaViewModel.getMatchTime(), triviaViewModel.getAverageQuestionTime());
-                    triviaViewModel.submitScore(score)
+                    triviaViewModel.submitScore(getActivity())
                             .observe(SubmitScoreFragment.this, SubmitScoreFragment.this);
                 } else {
                     binding.usernameEditText.setError(getString(R.string.username_is_required));

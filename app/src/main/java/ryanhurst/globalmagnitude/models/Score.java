@@ -1,30 +1,32 @@
 package ryanhurst.globalmagnitude.models;
 
-import com.google.gson.annotations.SerializedName;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 /**
  * Score model
  *
  * Created by Ryan on 11/6/2017.
  */
-
+@Entity
 public class Score {
-    @SerializedName("userid")
+
+    @PrimaryKey(autoGenerate = true)
+    public int scoreId;
+
+    @ColumnInfo(name = "user_id")
     public String userId;
 
-    @SerializedName("score")
-    public String score;
+    @ColumnInfo(name = "score")
+    public double score;
 
-    @SerializedName("mtime")
-    public String matchTime;
+    @ColumnInfo(name = "match_time")
+    public long matchTime;
 
-    @SerializedName("qtime")
-    public String averageQuestionTime;
-
-    public Score(String userId, String score, String matchTime, String averageQuestionTime) {
+    public Score(String userId, double score, long matchTime) {
         this.userId = userId;
-        this.score = score.replace("%", "");
+        this.score = score;
         this.matchTime = matchTime;
-        this.averageQuestionTime = averageQuestionTime;
     }
 }

@@ -2,6 +2,7 @@ package ryanhurst.globalmagnitude.viewmodels;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
+import ryanhurst.globalmagnitude.GmHelper;
 import ryanhurst.globalmagnitude.models.Score;
 
 /**
@@ -25,17 +26,11 @@ public class ScoreViewModel extends BaseObservable {
 
     @Bindable
     public String getScore() {
-        return scoreModel.score + "%";
+        return GmHelper.formatScore(scoreModel.score);
     }
 
     @Bindable
     public String getMatchTime() {
-        return scoreModel.matchTime;
+        return GmHelper.formatElapsedTime(scoreModel.matchTime);
     }
-
-    @Bindable
-    public String getAverageQuestionTime() {
-        return scoreModel.averageQuestionTime + "";
-    }
-
 }

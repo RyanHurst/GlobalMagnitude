@@ -1,6 +1,10 @@
 package ryanhurst.globalmagnitude.viewmodels;
 
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.os.AsyncTask;
+
 import java.util.ArrayList;
 
 import androidx.databinding.Bindable;
@@ -8,7 +12,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import ryanhurst.globalmagnitude.BR;
 import ryanhurst.globalmagnitude.GmHelper;
-import ryanhurst.globalmagnitude.SubmitScoreAsyncTask;
 import ryanhurst.globalmagnitude.models.Score;
 import ryanhurst.globalmagnitude.models.TriviaGame;
 
@@ -21,13 +24,12 @@ import ryanhurst.globalmagnitude.models.TriviaGame;
 public class TriviaViewModel extends ObservableViewModel {
 
     private static final String TAG = "TriviaViewModel";
-    private static final String USERNAME_KEY = "username";
 
     private TriviaGame triviaGameModel = new TriviaGame();
 
     private MutableLiveData<ArrayList<Integer>> currentAnswersLiveData;
     private MutableLiveData<Boolean> submittedScoreLiveData;
-    private SubmitScoreAsyncTask submitScoreAsyncTask;
+    private AsyncTask<Void, Void, Void> submitScoreAsyncTask;
 
     @Bindable
     public String username;
@@ -36,24 +38,18 @@ public class TriviaViewModel extends ObservableViewModel {
     public boolean loading;
 
     public TriviaViewModel() {
-//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences();
-//        this.username = preferences.getString(USERNAME_KEY, "");
-        this.username = "ryan";
     }
 
     @Bindable
     public String getNumberCorrect() {
         int numberCorrect = GmHelper.getNumberCorrect(triviaGameModel);
-
         return numberCorrect + "/" + TriviaGame.NUMBER_OF_ROUNDS;
     }
 
     @Bindable
     public String getScore() {
-        int numberCorrect = GmHelper.getNumberCorrect(triviaGameModel);
-
-        int percent = (numberCorrect * 100) / TriviaGame.NUMBER_OF_ROUNDS;
-        return percent + "%";
+        double score = calculateScore();
+        return GmHelper.formatScore(score);
     }
 
     @Bindable
@@ -126,30 +122,40 @@ public class TriviaViewModel extends ObservableViewModel {
         return currentAnswersLiveData;
     }
 
-    public LiveData<Boolean> submitScore(Score score) {
-//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this.getApplication());
-//        preferences.edit()
-//                .putString(USERNAME_KEY, username)
-//                .apply();
+    private double calculateScore() {
+        int numberCorrect = GmHelper.getNumberCorrect(triviaGameModel);
+        return ((double) numberCorrect) / TriviaGame.NUMBER_OF_ROUNDS;
+    }
 
+    @SuppressLint("StaticFieldLeak")
+    public LiveData<Boolean> submitScore(final Context context) {
+        GmHelper.setUsername(context, username);
+        final Score score = new Score(username, calculateScore(), triviaGameModel.endTime - triviaGameModel.startTime);
         if(submitScoreAsyncTask == null) {
             loading = true;
             notifyPropertyChanged(BR.loading);
 
             submittedScoreLiveData = new MutableLiveData<>();
-            submitScoreAsyncTask = new SubmitScoreAsyncTask(this);
+            submitScoreAsyncTask = new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... voids) {
+                    GmHelper.getDatabase(context).scoreDao().insertAll(score);
+                    return null;
+                }
 
-            submitScoreAsyncTask.execute(score);
+                @Override
+                protected void onPostExecute(Void aVoid) {
+                    super.onPostExecute(aVoid);
+                    submittedScoreLiveData.setValue(true);
+                    submitScoreAsyncTask = null;
+                    loading = false;
+                    notifyPropertyChanged(BR.loading);
+                }
+            };
+            submitScoreAsyncTask.execute();
         }
 
         return submittedScoreLiveData;
-    }
-
-    public void scoreSubmitted(Boolean success) {
-        submittedScoreLiveData.setValue(success);
-        submitScoreAsyncTask = null;
-        loading = false;
-        notifyPropertyChanged(BR.loading);
     }
 
     @Override

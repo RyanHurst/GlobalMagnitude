@@ -1,106 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <data>
-
-        <import type="android.view.View"/>
-
-        <variable
-            name="vm"
-            type="ryanhurst.globalmagnitude.viewmodels.LeaderboardViewModel"/>
-    </data>
+    xmlns:tools="http://schemas.android.com/tools">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="ryanhurst.globalmagnitude.LeaderboardFragment">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.core.widget.NestedScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="100dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="-20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="-20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/button_gradient"
+                    android:fontFamily="@font/faster_one"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:rotation="-5"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"
+                    android:textSize="42sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="100dp"
                     android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:fontFamily="@font/faster_one"
-                        android:text="@string/app_name"
-                        android:textSize="42sp"
-                        android:gravity="center"
-                        android:rotation="-5"
-                        android:padding="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp"
-                        android:textColor="@color/white"
-                        android:layout_marginLeft="-20dp"
-                        android:layout_marginRight="-20dp"
-                        android:background="@drawable/button_gradient"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_height="56dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="56dp"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginStart="8dp"
-                            android:orientation="horizontal">
+                        <TextView
+                            style="@style/LeaderboardColumnText"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:text="@string/username" />
 
-                            <TextView
-                                style="@style/LeaderboardColumnText"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="2"
-                                android:text="@string/username"/>
+                        <TextView
+                            style="@style/LeaderboardColumnText"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="@string/score" />
 
-                            <TextView
-                                style="@style/LeaderboardColumnText"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/score"/>
-
-                            <TextView
-                                style="@style/LeaderboardColumnText"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:text="@string/time"/>
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/divider"/>
+                        <TextView
+                            style="@style/LeaderboardColumnText"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="@string/time" />
 
                     </LinearLayout>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/leaderboard_recycler_view"
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="1dp"
+                        android:background="@color/divider" />
 
                 </LinearLayout>
 
-            </androidx.core.widget.NestedScrollView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/leaderboard_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
         <Button
             android:id="@+id/play_button"
@@ -109,8 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="16dp"
-            android:text="@string/play"
-            />
+            android:text="@string/play" />
 
     </FrameLayout>
 </layout>

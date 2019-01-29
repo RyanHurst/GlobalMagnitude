@@ -1,7 +1,13 @@
 package ryanhurst.globalmagnitude;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import java.util.Locale;
 
+import androidx.room.Room;
+import ryanhurst.globalmagnitude.models.AppDatabase;
 import ryanhurst.globalmagnitude.models.TriviaGame;
 
 /**
@@ -9,6 +15,9 @@ import ryanhurst.globalmagnitude.models.TriviaGame;
  */
 
 public class GmHelper {
+
+    private static final String USERNAME_KEY = "username";
+    private static final String DATABASE_NAME = "GlobalMagnitude";
 
     public static String formatElapsedTime(long elapsedTimeMillis) {
         long elapsedMinutes = elapsedTimeMillis / (1000 * 60);
@@ -25,6 +34,11 @@ public class GmHelper {
         return String.format(Locale.US, "%.2f", elapsedSeconds);
     }
 
+    public static String formatScore(double score) {
+        double percent = score * 100;
+        return String.format(Locale.US, "%.1f%s", percent, "%");
+    }
+
     public static int getNumberCorrect(TriviaGame triviaGame) {
         int numberCorrect = 0;
 
@@ -38,4 +52,19 @@ public class GmHelper {
         return numberCorrect;
     }
 
+    public static AppDatabase getDatabase(Context context) {
+        return Room.databaseBuilder(context, AppDatabase.class, DATABASE_NAME).build();
+    }
+
+    public static String getUsername(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(USERNAME_KEY, "");
+    }
+
+    public static void setUsername(Context context, String username) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        preferences.edit()
+                .putString(USERNAME_KEY, username)
+                .apply();
+    }
 }
