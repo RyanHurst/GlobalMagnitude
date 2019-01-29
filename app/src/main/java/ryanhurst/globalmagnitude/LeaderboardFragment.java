@@ -34,12 +34,6 @@ public class LeaderboardFragment extends Fragment implements Observer<List<Score
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        GmHelper.getDatabase(getActivity()).scoreDao().getAll().observe(this, this);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_leaderboard, container, false);
@@ -52,6 +46,14 @@ public class LeaderboardFragment extends Fragment implements Observer<List<Score
         });
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // TODO: 1/29/19 for some reason, the livedata only seems to get updated once.
+        // it doesn't update when the database updates. Move this to onCreate if that changes
+        GmHelper.getDatabase(getActivity()).scoreDao().getAll().observe(this, this);
     }
 
     @Override
